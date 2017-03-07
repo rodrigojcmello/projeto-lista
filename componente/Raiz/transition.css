@@ -1,0 +1,60 @@
+body {
+    background-color: #c3cfd5;
+    margin: 0;
+}
+
+.tela {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    z-index: 0;
+}
+
+/* Swipe Left --------------------------------------------------------------- */
+
+.swipe-left-enter {
+    left: 100%;
+    transition: left 0.4s ease;
+    z-index: 1;
+}
+.swipe-left-enter-active {
+    left: 0;
+}
+
+.swipe-left-leave {
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+.swipe-left-leave-active {
+    opacity: 0;
+}
+
+/* Swipe Right--------------------------------------------------------------- */
+
+.tela.swipe-right-enter {
+    left: auto;
+    right: 100%;
+}
+
+.swipe-right-enter {
+    right: 100%;
+    transition: right 0.4s ease;
+    z-index: 1;
+}
+
+.swipe-right-enter.swipe-right-enter-active {
+    right: 0;
+}
+
+.swipe-right-leave {
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+.swipe-right-leave-active {
+    opacity: 0;
+}
