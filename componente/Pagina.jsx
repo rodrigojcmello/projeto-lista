@@ -1,18 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class extends Component {
     render() {
         return (
             <div>
-                Index
-                <ReactCSSTransitionGroup
-                    component="div"
-                    transitionName="example"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}
-                    >
-                        { React.cloneElement(this.props.children, { key: this.props.location.pathname }) }
-                </ReactCSSTransitionGroup>
+                Página <br />
+                <Link to="/login">Login</Link> <br />
+                <Link to={ global.elist.usuario.url }>Usuário</Link> <br />
+                <Link to="/settings">Settings</Link>
             </div>
         );
     }

@@ -1,23 +1,30 @@
 import React from "react";
 import { render } from "react-dom";
-import { Router, Route, hashHistory, IndexRoute } from "react-router";
+import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
-import Raiz from "./componente/Raiz";
-import Acesso from "./componente/Acesso";
-import Tarefa from "./componente/Tarefa";
-import Configuracao from "./componente/Configuracao";
+import Transition from "./componente/Transition";
+
+import Login from "./componente/Login";
+import Usuario from "./componente/Usuario";
+import Pagina from "./componente/Pagina";
+import Settings from "./componente/Settings";
+
+import "./global.js";
 
 var raiz = document.createElement("div");
 raiz.id = "raiz";
 document.body.appendChild(raiz);
 
 render((
-    <Router history={hashHistory}>
-        <Route path="/" component={Raiz}>
-            {/* <IndexRoute component={Teste} /> */}
-            <Route path="/login" component={Acesso} />
-            <Route path="/tag" component={Tarefa} />
-            <Route path="/settings" component={Configuracao} />
-        </Route>
+    <Router>
+        <Switch>
+            <Route path="/" exact render={ () => (
+                global.elist.usuario.id ? <Redirect to="/login" /> : <Redirect to={ global.elist.usuario.url } />
+            ) } />
+            <Transition path="/login" component={ Login } />
+            <Transition path="/settings" component={ Settings } />
+            <Transition path="/:usuario" component={ Usuario } nome="rodrigo" />
+        </Switch>
     </Router>
 ), document.getElementById("raiz"));
