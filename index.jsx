@@ -20,7 +20,7 @@ render((
     <Router>
         <Switch>
             <Route path="/" exact render={ () => (
-                global.elist.usuario.id ? <Redirect to="/login" /> : <Redirect to={ global.elist.usuario.url } />
+                global.elist.usuario.id ? <Redirect to={ global.elist.usuario.url }/> : <Redirect to="/login" />
             ) } />
             <Transition path="/login" component={ Login } />
             <Transition path="/settings" component={ Settings } />

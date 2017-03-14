@@ -7,7 +7,7 @@ export default class extends Component {
         super(props);
     }
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         console.log("global.elist.transPage");
         console.log(global.elist.transPage);
         var children = "";
