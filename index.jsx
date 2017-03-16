@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 import Transition from "./componente/Transition";
@@ -17,14 +17,14 @@ raiz.id = "raiz";
 document.body.appendChild(raiz);
 
 render((
-    <Router>
+    <BrowserRouter>
         <Switch>
             <Route path="/" exact render={ () => (
                 global.elist.usuario.id ? <Redirect to={ global.elist.usuario.url }/> : <Redirect to="/login" />
             ) } />
             <Transition path="/login" component={ Login } />
             <Transition path="/settings" component={ Settings } />
-            <Transition path="/:usuario" component={ Usuario } nome="rodrigo" />
+            <Transition path="/:usuario" component={ Usuario } />
         </Switch>
-    </Router>
+    </BrowserRouter>
 ), document.getElementById("raiz"));

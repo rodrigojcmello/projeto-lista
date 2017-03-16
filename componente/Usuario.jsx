@@ -4,14 +4,14 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Sub1 from "./Sub1";
 import Sub2 from "./Sub2";
 
-import Link from "./Link.jsx";
+import Link from "./Link";
 
 export default class extends Component {
     constructor(props) {
         super(props);
     }
     componentWillMount() {
-        // global.elist.transPage = false;
+        // global.elist.transPage = true;
         // console.log("OI");
     }
     // clickSub1() {
@@ -28,7 +28,7 @@ export default class extends Component {
                 <h1>Usuário</h1>
                 <li><Link to="/login" transPage={true} >Voltar</Link></li>
                 <li><Link to="/:usuario/sub1">Sub 1 link</Link></li>
-                <li><Link to="/:usuario/sub2" transPage={true} >Sub 2 link</Link></li>
+                <li><Link to="/:usuario/sub2">Sub 2 link</Link></li>
                 {/* <li><a onClick={this.clickSub1}>Sub 1 click</a></li> */}
                 {/* <li><a onClick={this.clickSub2}>Sub 2 click</a></li> */}
                 <Route path="/:usuario/sub1" component={Sub1} />

@@ -1,6 +1,6 @@
 global.elist = {};
 
-global.elist.transPage = true;
+// global.elist.transPage = true;
 global.elist.transEnter = 400;
 global.elist.transLeave = 400;
 
