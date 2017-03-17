@@ -12,4 +12,4 @@ const compiler = require('webpack')(webpackConfig);
 
 app.use(webpackMiddleware(compiler));
 app.get('*');
-app.listen(3000);
+app.listen(3030);

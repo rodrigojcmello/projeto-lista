@@ -7,7 +7,7 @@ export default class extends Component {
             <div>
                 Página <br />
                 <Link to="/login">Login</Link> <br />
-                <Link to={ global.elist.usuario.url }>Usuário</Link> <br />
+                <Link to={ global.usuario.url }>Usuário</Link> <br />
                 <Link to="/settings">Settings</Link>
             </div>
         );
