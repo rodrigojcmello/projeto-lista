@@ -5,59 +5,59 @@ import TransitionGroup from "react-addons-css-transition-group";
 export default class extends Component {
     constructor(props) {
         super(props);
-        // this.rotaAcao = {
-        //     "rodrigo-mello": {
-        //         login: {
-        //             vindo: { transPage: true },
-        //             indo: { transPage: true }
-        //         }
-        //     }
-        // };
     }
     render() {
-        var animacao = false;
-
-        // if (this.props.location.pathname == "/rodrigo-mello") {
-        // }
-        animacao = true;
-
-        // global.animacao = !global.animacao;
-        // animacao = global.animacao;
-
-        console.log("animacao");
-        console.log(animacao);
-
-        console.log("global.historico");
-        console.log(global.historico);
-        console.log("this.props.location.pathname");
-        console.log(this.props.location.pathname);
-
-        var children = "";
-        console.log("if");
-        if (this.props) {
-            if (animacao) {
-                console.log("animacao true");
-                children =
-                    <TransitionGroup
-                        component="div"
-                        transitionName="swipe"
-                        transitionEnterTimeout={800}
-                        transitionLeaveTimeout={800}
-                        >
-                            <Route {...this.props} key={this.props.location.pathname} />
-                    </TransitionGroup>;
-            } else {
-                console.log("animacao false");
-                children = <Route {...this.props} />;
-                // children = "nada";
+        var rota = {};
+        rota["/pagina1"] = {
+            transitionEnterTimeout: 500,
+            transitionLeaveTimeout: 501,
+            origem: {
+                "/pagina2": "transition-slide-right",
+                "/pagina3": "transition-slide-right"
             }
-        } else {
-            console.log("sem this.props");
+        };
+        rota["/pagina2"] = {
+            transitionEnterTimeout: 500,
+            transitionLeaveTimeout: 501,
+            origem: {
+                "/pagina1": "transition-slide-left",
+                "/pagina3": "transition-slide-right"
+            }
+        };
+        rota["/pagina3"] = {
+            transitionEnterTimeout: 500,
+            transitionLeaveTimeout: 501,
+            origem: {
+                "/pagina1": "transition-slide-left",
+                "/pagina2": "transition-slide-left  "
+            }
+        };
+
+        var transitionName = "transition-none";
+        var transitionEnterTimeout = 1;
+        var transitionLeaveTimeout = 2;
+
+        var pathname = this.props.location.pathname;
+        if (rota[pathname]) {
+            if (typeof global.historico[0] != "undefined") {
+                transitionName = rota[pathname].origem[global.historico[0]];
+            }
+            transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
+            transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
         }
+        console.log("estou em: " + pathname);
+        console.log("estava em: " + global.historico[0]);
+        console.log("-----");
+
         return (
-            <div>
-                { children }
-            </div>
+            <TransitionGroup
+                component="div"
+                transitionName={transitionName}
+                transitionEnterTimeout={transitionEnterTimeout}
+                transitionLeaveTimeout={transitionLeaveTimeout}
+                >
+                    <Route {...this.props} key={pathname} />
+            </TransitionGroup>
         );
     }
 }

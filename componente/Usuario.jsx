@@ -18,14 +18,6 @@ export default class extends Component {
     componentDidMount() {
         console.log("componentDidMount Usuario");
     }
-    // clickSub1() {
-    //     global.elist.transPage = false;
-    //     location.href = location.origin + "#/:usuario/sub1";
-    // }
-    // clickSub2() {
-    //     global.elist.transPage = false;
-    //     location.href = location.origin + "#/:usuario/sub2";
-    // }
     render() {
         return (
             <div className="tela">

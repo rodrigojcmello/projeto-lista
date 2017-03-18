@@ -8,9 +8,12 @@ export default class extends Component {
         super(props);
     }
     componentDidMount() {
+        global.historico[0] = history.location.pathname;
         history.listen((location, action) => {
             global.historico[1] = global.historico[0];
             global.historico[0] = location.pathname;
+            console.log("mudei: " + location.pathname);
+            console.log("#####");
         });
     }
     render() {
