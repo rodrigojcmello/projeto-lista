@@ -6,9 +6,9 @@ export default class extends Component {
         return (
             <div className="full screen">
                 <h1>Página 2</h1>
-                <Link to="/pagina1">Página 1</Link>
-                <Link to="/pagina2">Página 2</Link>
-                <Link to="/pagina3">Página 3</Link>
+                <li><Link to="/pagina1">Página 1</Link></li>
+                <li><Link to="/pagina2">Página 2</Link></li>
+                <li><Link to="/pagina3">Página 3</Link></li>
             </div>
         );
     }

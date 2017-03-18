@@ -29,7 +29,7 @@ export default class extends Component {
             transitionLeaveTimeout: 501,
             origem: {
                 "/pagina1": "transition-slide-left",
-                "/pagina2": "transition-slide-left  "
+                "/pagina2": "transition-slide-left"
             }
         };
 
@@ -37,17 +37,21 @@ export default class extends Component {
         var transitionEnterTimeout = 1;
         var transitionLeaveTimeout = 2;
 
-        var pathname = this.props.location.pathname;
-        if (rota[pathname]) {
-            if (typeof global.historico[0] != "undefined") {
-                transitionName = rota[pathname].origem[global.historico[0]];
+        if (typeof this.props.location != "undefined") {
+            if (typeof this.props.location.pathname != "undefined") {
+                var pathname = this.props.location.pathname;
+                if (rota[pathname]) {
+                    if (typeof global.historico[0] != "undefined") {
+                        transitionName = rota[pathname].origem[global.historico[0]];
+                    }
+                    transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
+                    transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
+                }
+                // console.log("estou em: " + pathname);
+                // console.log("estava em: " + global.historico[0]);
+                // console.log("-----");
             }
-            transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
-            transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
         }
-        console.log("estou em: " + pathname);
-        console.log("estava em: " + global.historico[0]);
-        console.log("-----");
 
         return (
             <TransitionGroup
