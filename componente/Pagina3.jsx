@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import Transition from "./Route/Transition";
+import Transition from "./Route/TransitionWithNavbar";
 
 import Pagina4 from "./Pagina4";
 import Pagina5 from "./Pagina5";

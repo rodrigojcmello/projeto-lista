@@ -8,37 +8,18 @@ export default class extends Component {
     }
     render() {
         var rota = {};
-        rota["/pagina1"] = {
+        rota["/pagina3/pagina5"] = {
             transitionEnterTimeout: 500,
             transitionLeaveTimeout: 501,
             origem: {
-                "/pagina2": "transition-slide-right",
-                "/pagina3": "transition-slide-right"
-            }
-        };
-        rota["/pagina2"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
-            origem: {
-                "/pagina1": "transition-slide-left",
-                "/pagina3": "transition-slide-right",
-                "/pagina3/pagina4": "transition-slide-right"
-            }
-        };
-        rota["/pagina3"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
-            origem: {
-                "/pagina1": "transition-slide-left",
-                "/pagina2": "transition-slide-left"
+                "/pagina3/pagina4": "transition-slide-left-with-navbar",
+                "/pagina3/pagina6": "transition-slide-right-with-navbar"
             }
         };
 
         var transitionName = "transition-none";
         var transitionEnterTimeout = 1;
         var transitionLeaveTimeout = 2;
-
-        var children = "";
 
         if (typeof this.props.location != "undefined") {
             var pathname = this.props.location.pathname;
@@ -55,24 +36,7 @@ export default class extends Component {
                         console.log("pos");
                         transitionName = rota[pathname].origem[global.historico[0].substring(0, p)];
                     }
-
-
                 }
-                
-                // if (true) {
-                //     children = <TransitionGroup
-                //         component="div"
-                //         transitionName={transitionName}
-                //         transitionEnterTimeout={transitionEnterTimeout}
-                //         transitionLeaveTimeout={transitionLeaveTimeout}
-                //     >
-                //         <Route {...this.props} key={pathname} />
-                //     </TransitionGroup>;
-                // } else {
-                // }
-                children = <Route {...this.props} key={pathname} />;
-
-
                 transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
                 transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
 
@@ -82,12 +46,15 @@ export default class extends Component {
             }
         }
 
-
-
         return (
-            <div>
-                { children }
-            </div>
+            <TransitionGroup
+                component="div"
+                transitionName={transitionName}
+                transitionEnterTimeout={transitionEnterTimeout}
+                transitionLeaveTimeout={transitionLeaveTimeout}
+                >
+                    <Route {...this.props} key={pathname} />
+            </TransitionGroup>
         );
     }
 }
