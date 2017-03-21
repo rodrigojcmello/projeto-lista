@@ -38,29 +38,21 @@ export default class extends Component {
         var transitionEnterTimeout = 1;
         var transitionLeaveTimeout = 2;
 
-        rota = <Route {...this.props} />;
-
-        console.log("this.props.location");
-        console.log(this.props);
-
-        // if (typeof this.props.location != "undefined") {
-            // var pathname = this.props.location.pathname;
-            var pathname = this.props.path;
-            console.log("pathname");
-            console.log(this.props.path);
-            if (rota[pathname]) {
-                transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
-                transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
-
-                console.log("estou em: " + pathname);
-                console.log("estava em: " + global.historico[0]);
-                console.log("-----");
-
+        var pathname = this.props.location.pathname;
+        if (rota[pathname]) {
+            if (typeof global.historico != "undefined") {
+                if (typeof rota[pathname].origem[global.historico] != "undefined") {
+                    transitionName = rota[pathname].origem[global.historico];
+                }
             }
-            console.log(0);
-        // } else {
-        //     console.log(1);
-        // }
+            transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
+            transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
+
+            console.log("estou em: " + pathname);
+            console.log("estava em: " + global.historico);
+            console.log("-----");
+        }
+
         return (
             <TransitionGroup
                 component="div"
