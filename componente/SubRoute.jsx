@@ -52,29 +52,14 @@ export default class extends Component {
             console.log("estava em: " + global.historico);
             console.log("-----");
         }
-        console.log("pathname");
-        console.log(pathname);
-        var transitionEnter = true;
-        var transitionLeave = true;
-        if (pathname == "/pagina4") {
-            transitionEnter = false;
-            transitionLeave = false;
-        }
-        if (pathname == "/pagina4/pagina6") {
-            transitionEnter = false;
-            transitionLeave = false;
-        }
-        if (pathname == "/pagina4/pagina5") {
-            transitionEnter = false;
-            transitionLeave = false;
-        }
+
+        console.log("subrota");
+
         return (
             <TransitionGroup
                 component="div"
                 transitionName={transitionName}
-                transitionEnter={transitionEnter}
                 transitionEnterTimeout={transitionEnterTimeout}
-                transitionLeave={transitionLeave}
                 transitionLeaveTimeout={transitionLeaveTimeout}
                 >
                     <Route {...this.props} key={pathname} />
