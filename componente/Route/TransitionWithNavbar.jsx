@@ -1,59 +1,37 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import TransitionGroup from "react-addons-css-transition-group";
+
+import Pagina4 from "../Pagina4";
+import Pagina5 from "../Pagina5";
+import Pagina6 from "../Pagina6";
 
 export default class extends Component {
     constructor(props) {
         super(props);
     }
     render() {
-        var rota = {};
-        rota["/pagina3/pagina5"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
-            origem: {
-                "/pagina3/pagina4": "transition-slide-left-with-navbar",
-                "/pagina3/pagina6": "transition-slide-right-with-navbar"
-            }
-        };
+        // console.log(this.props.children.props);
+        var enter = 400;
+        var leave = 400;
 
-        var transitionName = "transition-none";
-        var transitionEnterTimeout = 1;
-        var transitionLeaveTimeout = 2;
-
-        if (typeof this.props.location != "undefined") {
-            var pathname = this.props.location.pathname;
-            if (rota[pathname]) {
-                if (typeof global.historico[0] != "undefined") {
-                    if (typeof rota[pathname].origem[global.historico[0]] != "undefined") {
-                        transitionName = rota[pathname].origem[global.historico[0]];
-                    } else {
-                        var p, pos = global.historico[0].indexOf("/");
-                        while (pos > -1) {
-                            p = pos;
-                            pos = global.historico[0].indexOf("/", pos + 1);
-                        }
-                        console.log("pos");
-                        transitionName = rota[pathname].origem[global.historico[0].substring(0, p)];
-                    }
-                }
-                transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
-                transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
-
-                console.log("estou em: " + pathname);
-                console.log("estava em: " + global.historico[0]);
-                console.log("-----");
-            }
-        }
-
+        console.log("location");
+        console.log(location);
         return (
             <TransitionGroup
                 component="div"
-                transitionName={transitionName}
-                transitionEnterTimeout={transitionEnterTimeout}
-                transitionLeaveTimeout={transitionLeaveTimeout}
+                transitionName="transition-slide-left-with-navbar"
+                transitionEnterTimeout={enter}
+                transitionLeaveTimeout={leave}
                 >
-                    <Route {...this.props} key={pathname} />
+                {/* { React.cloneElement(this.props.children, { key: this.props.children.props.path }) } */}
+                {/* <Route {...this.props} key="/pagina3" /> */}
+                {/* { React.cloneElement(<Route {...this.props} />, { key: this.props.path }) } */}
+                <Switch>
+                    <Route path="/pagina3/pagina4" component={Pagina4} key="/pagina3/pagina4" />
+                    <Route path="/pagina3/pagina5" component={Pagina5} key="/pagina3/pagina5" />
+                    <Route path="/pagina3/pagina6" component={Pagina6} key="/pagina3/pagina6" />
+                </Switch>
             </TransitionGroup>
         );
     }

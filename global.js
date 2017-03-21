@@ -1,6 +1,4 @@
-// global.transPage = true;
-global.transEnter = 400;
-global.transLeave = 400;
+global.transitionPage = true;
 
 global.usuario = {};
 // global.usuario.id = 10;

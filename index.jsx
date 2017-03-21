@@ -1,15 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import { render } from "react-dom";
-import { Route, Redirect } from "react-router-dom";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { HashRouter as Router, Redirect } from "react-router-dom";
+import Route from "./componente/Route";
 
-import Router from "./componente/Route/Router";
-import Transition from "./componente/Route/Transition";
-
-import Login from "./componente/Login";
-import Usuario from "./componente/Usuario";
-import Pagina from "./componente/Pagina";
-import Settings from "./componente/Settings";
+import createHistory from "history/createHashHistory";
+const history = createHistory();
 
 import Pagina1 from "./componente/Pagina1";
 import Pagina2 from "./componente/Pagina2";
@@ -18,24 +13,33 @@ import Pagina3 from "./componente/Pagina3";
 import "./global.js";
 import "./css/dist/estilo.css";
 
+// global.historico[0] = history.location.pathname;
+// history.listen((location, action) => {
+//     global.historico[1] = global.historico[0];
+//     global.historico[0] = location.pathname;
+//     console.log("mudei: " + location.pathname);
+//     console.log("#####");
+// });
+
+// Componente Rota -------------------------------------------------------------
+
+const Rota = () => (
+    <Router>
+        <div>
+            <Route exact path="/" render={() => (
+                <Redirect to="/pagina1" />
+            )} />
+            <Route path="/pagina1" component={Pagina1} />
+            <Route path="/pagina2" component={Pagina2} />
+            <Route path="/pagina3" component={Pagina3} />
+        </div>
+    </Router>
+);
+
+// Render ----------------------------------------------------------------------
+
 var raiz = document.createElement("div");
 raiz.id = "raiz";
 document.body.appendChild(raiz);
 
-render((
-    <Router>
-        {/* <Route path="/" exact render={ () => (
-            global.usuario.id ? <Redirect to={global.usuario.url}/> : <Redirect to="/login" />
-        ) } />
-        <Transition path="/login" component={ Login } />
-        <Transition path="/settings" component={ Settings } />
-        <Transition path="/:usuario" component={ Usuario } />
-        <Transition path="/:usuario" component={ Usuario } /> */}
-        <Route path="/" exact render={ () => (
-            <Redirect to="/pagina1"/>
-        ) } />
-        <Transition path="/pagina1" component={Pagina1} />
-        <Transition path="/pagina2" component={Pagina2} />
-        <Transition path="/pagina3" component={Pagina3} />
-    </Router>
-), document.getElementById("raiz"));
+render(<Rota />, document.getElementById("raiz"));

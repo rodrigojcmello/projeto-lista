@@ -9,16 +9,16 @@ export default class extends Component {
     render() {
         var rota = {};
         rota["/pagina1"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
+            transitionEnterTimeout: 5000,
+            transitionLeaveTimeout: 5001,
             origem: {
                 "/pagina2": "transition-slide-right",
                 "/pagina3": "transition-slide-right"
             }
         };
         rota["/pagina2"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
+            transitionEnterTimeout: 5000,
+            transitionLeaveTimeout: 5001,
             origem: {
                 "/pagina1": "transition-slide-left",
                 "/pagina3": "transition-slide-right",
@@ -26,8 +26,8 @@ export default class extends Component {
             }
         };
         rota["/pagina3"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
+            transitionEnterTimeout: 5000,
+            transitionLeaveTimeout: 5001,
             origem: {
                 "/pagina1": "transition-slide-left",
                 "/pagina2": "transition-slide-left"
@@ -57,20 +57,10 @@ export default class extends Component {
                     }
 
 
+
                 }
-                
-                // if (true) {
-                //     children = <TransitionGroup
-                //         component="div"
-                //         transitionName={transitionName}
-                //         transitionEnterTimeout={transitionEnterTimeout}
-                //         transitionLeaveTimeout={transitionLeaveTimeout}
-                //     >
-                //         <Route {...this.props} key={pathname} />
-                //     </TransitionGroup>;
-                // } else {
-                // }
-                children = <Route {...this.props} key={pathname} />;
+
+
 
 
                 transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
@@ -80,12 +70,41 @@ export default class extends Component {
                 console.log("estava em: " + global.historico[0]);
                 console.log("-----");
             }
+
+
+            if (global.historico[0] == "/pagina2" && pathname == "/pagina3") {
+                global.transitionPage = false;
+                console.log("FALSOOOOO");
+            } else if (global.historico[0] == "/pagina3" && pathname == "/pagina2") {
+                global.transitionPage = true;
+                console.log("ANIMOU 1");
+            } else {
+                global.transitionPage = true;
+                console.log("ANIMOU 2");
+            }
+
+            var teste = "teste";
+            if (global.transitionPage) {
+                teste = "123";
+                children = <TransitionGroup
+                    component="div"
+                    transitionName={transitionName}
+                    transitionEnterTimeout={transitionEnterTimeout}
+                    transitionLeaveTimeout={transitionLeaveTimeout}
+                >
+                    <Route {...this.props} key={pathname} />
+                </TransitionGroup>;
+            } else {
+                children = <Route {...this.props} key={pathname} />;
+            }
+
+
         }
 
 
 
         return (
-            <div>
+            <div className={teste}>
                 { children }
             </div>
         );
