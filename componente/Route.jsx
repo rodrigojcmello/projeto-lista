@@ -9,28 +9,26 @@ export default class extends Component {
     render() {
         var rota = {};
         rota["/pagina1"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
-            origem: {
-                "/pagina2": "transition-slide-right",
-                "/pagina3": "transition-slide-right"
-            }
+            "/pagina2": { transitionName: "transition-slide-right" },
+            "/pagina3": { transitionName: "transition-slide-right" },
+            "/pagina4/pagina5": { transitionName: "transition-slide-right" }
         };
         rota["/pagina2"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
-            origem: {
-                "/pagina1": "transition-slide-left",
-                "/pagina3": "transition-slide-right",
-                "/pagina3/pagina4": "transition-slide-right"
-            }
+            "/pagina1": { transitionName: "transition-slide-left" },
+            "/pagina3": { transitionName: "transition-slide-right" },
+            "/pagina4/pagina5": { transitionName: "transition-slide-right" }
         };
         rota["/pagina3"] = {
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 501,
-            origem: {
-                "/pagina1": "transition-slide-left",
-                "/pagina2": "transition-slide-left"
+            "/pagina1": { transitionName: "transition-slide-left" },
+            "/pagina2": { transitionName: "transition-slide-left" },
+            "/pagina4/pagina5": { transitionName: "transition-slide-right" }
+        };
+        rota["/pagina4"] = {
+            "/pagina1": { transitionName: "transition-slide-left" },
+            "/pagina2": { transitionName: "transition-slide-left" },
+            "/pagina3": {
+                transitionName: "transition-slide-left",
+                transition: false
             }
         };
 
@@ -39,46 +37,51 @@ export default class extends Component {
         var transitionLeaveTimeout = 2;
 
         var pathname = this.props.location.pathname;
+        var historico = global.historico;
         if (rota[pathname]) {
-            if (typeof global.historico != "undefined") {
-                if (typeof rota[pathname].origem[global.historico] != "undefined") {
-                    transitionName = rota[pathname].origem[global.historico];
+            if (typeof historico != "undefined") {
+                if (typeof rota[pathname][historico] != "undefined") {
+                    transitionName = rota[pathname][historico].transitionName;
+                } else {
+                    var p, pos = historico.indexOf("/");
+                    while (pos > -1) {
+                        p = pos;
+                        pos = historico.indexOf("/", pos + 1);
+                    }
+                    if (p > 0) {
+                        transitionName = rota[pathname][historico.substring(0, p)].transitionName;
+                    }
+                }
+
+                if (typeof rota[pathname][historico] != "undefined") {
+                    if (typeof rota[pathname][historico].forceRedirect != "undefined") {
+                        if (rota[pathname][historico].forceRedirect) {
+                            // global.transition = false;
+                            global.transition = true;
+                        }
+                    }
                 }
             }
-            transitionEnterTimeout = rota[pathname].transitionEnterTimeout;
-            transitionLeaveTimeout = rota[pathname].transitionLeaveTimeout;
+        }
 
-            console.log("estou em: " + pathname);
-            console.log("estava em: " + global.historico);
-            console.log("-----");
-        }
-        console.log("pathname");
-        console.log(pathname);
-        var transitionEnter = true;
-        var transitionLeave = true;
-        if (pathname == "/pagina4") {
-            transitionEnter = false;
-            transitionLeave = false;
-        }
-        if (pathname == "/pagina4/pagina6") {
-            transitionEnter = false;
-            transitionLeave = false;
-        }
-        if (pathname == "/pagina4/pagina5") {
-            transitionEnter = false;
-            transitionLeave = false;
-        }
-        return (
-            <TransitionGroup
+        var children;
+        if (global.transition) {
+            children = <TransitionGroup
                 component="div"
                 transitionName={transitionName}
-                transitionEnter={transitionEnter}
-                transitionEnterTimeout={transitionEnterTimeout}
-                transitionLeave={transitionLeave}
-                transitionLeaveTimeout={transitionLeaveTimeout}
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={501}
                 >
                     <Route {...this.props} key={pathname} />
-            </TransitionGroup>
+            </TransitionGroup>;
+        } else {
+            children = <Route {...this.props} />;
+        }
+
+        return (
+            <div>
+                { children }
+            </div>
         );
     }
 }

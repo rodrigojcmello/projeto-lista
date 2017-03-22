@@ -9,6 +9,7 @@ export default class extends Component {
                 <Link to="/pagina1">Página 1</Link>
                 <Link to="/pagina2">Página 2</Link>
                 <Link to="/pagina3">Página 3</Link>
+                <Link to="/pagina4">Página 4</Link>
             </div>
         );
     }

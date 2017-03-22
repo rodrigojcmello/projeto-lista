@@ -6,6 +6,7 @@ global.usuario.url = "/rodrigo-mello";
 
 global.historico = {};
 
-global.animacao = false;
+global.transition = true;
+global.transitionRedirect = false;
 
 module.exports = global;

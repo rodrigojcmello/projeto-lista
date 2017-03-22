@@ -30,14 +30,6 @@ class Rota extends Component {
         super(props);
     }
     render() {
-        var navbar =
-            <div>
-                <li>Opção 2</li>
-                <li>Opção 3</li>
-                <li>Opção 4</li>
-            </div>;
-        var exibiNavbar = false;
-        console.log("this.props.location");
         return (
             <div>
                 <Router>
@@ -48,11 +40,6 @@ class Rota extends Component {
                         <Route path="/pagina1" component={Pagina1} />
                         <Route path="/pagina2" component={Pagina2} />
                         <Route path="/pagina3" component={Pagina3} />
-                    </Switch>
-                </Router>
-                { exibiNavbar ? navbar : "" }
-                <Router>
-                    <Switch>
                         <Route path="/pagina4" component={Pagina4} />
                     </Switch>
                 </Router>
