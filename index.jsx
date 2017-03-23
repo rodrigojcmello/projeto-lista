@@ -24,7 +24,7 @@ const App = ({ location }) => (
     <CSSTransitionSwitch
         transitionName='slide'
         transitionEnterTimeout={500}
-        transitionExitTimeout={500}
+        transitionLeaveTimeout={500}
         location={location}
         routes={[
             { path: '/', exact: true, component: Home },
@@ -39,7 +39,7 @@ const User = ({ match, location }) => (
         <CSSTransitionSwitch
             transitionName='slide'
             transitionEnterTimeout={500}
-            transitionExitTimeout={500}
+            transitionLeaveTimeout={500}
             component='div'
             location={location}
             routes={[
