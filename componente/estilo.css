@@ -1,0 +1,42 @@
+.view {
+    background: #ccc;
+    width: 1000px;
+}
+
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.fade-leave {
+    opacity: 1;
+}
+
+.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 0.5s;
+}
+
+.slide-enter {
+    position: absolute;
+    left: -1000px;;
+}
+
+.slide-enter-active {
+    left: 0px;
+    transition: left 0.5s;
+}
+
+.slide-leave {
+    position: absolute;
+    left: 0;
+}
+
+.slide-leave-active {
+    left: 100%;
+    transition: left 0.5s;
+}

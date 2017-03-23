@@ -64,7 +64,11 @@ export default class extends Component {
             }
         }
 
+        global.transition = true;
+        transitionName = "transition-slide-left";
+
         var children;
+
         if (global.transition) {
             children = <TransitionGroup
                 component="div"

@@ -10,11 +10,11 @@ import Pagina6 from "./Pagina6";
 
 export default class extends Component {
     componentDidMount() {
-        if (global.transition) {
-            global.transition = false;
-            history.replace("/pagina4/pagina5");
-        } else {
-        }
+        // if (global.transition) {
+        //     global.transition = false;
+        //     history.replace("/pagina4");
+        // } else {
+        // }
         // if (this.props.location.pathname == "/pagina4") {
         //     history.push("/pagina4/pagina5");
         // }
@@ -29,10 +29,6 @@ export default class extends Component {
                 <Link to="/pagina4">Página 4</Link>
                 <li><Link to="/pagina4/pagina5">Página 5</Link></li>
                 <li><Link to="/pagina4/pagina6">Página 6</Link></li>
-                <Switch>
-                    <SubRoute path="/pagina4/pagina5" component={Pagina5} />
-                    <SubRoute path="/pagina4/pagina6" component={Pagina6} />
-                </Switch>
             </div>
         );
     }
